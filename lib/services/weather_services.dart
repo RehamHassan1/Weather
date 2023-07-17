@@ -12,13 +12,15 @@ class WeatherServices {
     Uri url = Uri.parse('$baseurl/forecast.json?key=$apikey&q=$city&days=1');
     http.Response response = await http.get(url);
     Map<String, dynamic> data = jsonDecode(response.body);
-    WeatherModel weather = WeatherModel(
+    print(data);
+    /*  WeatherModel weather = WeatherModel(
         date: date['location']['localtime'],
         temp: date['forcast']['forcastday']['0']['avgtemp_c'],
         minTemp: date['forcast']['forcastday']['0']['mintemp_c'],
         maxTemp: date['forcast']['forcastday']['0']['maxtemp_c'],
         weatherstatename: date['forcast']['forcastday']['0']['condition']
-            ['text']);
+            ['text']);*/
+    WeatherModel weather = WeatherModel.fromJson(data);
     return weather;
   }
 }
